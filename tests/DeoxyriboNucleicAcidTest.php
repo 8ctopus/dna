@@ -99,13 +99,13 @@ final class DeoxyriboNucleicAcidTest extends TestCase
         $dna[$badValue] = 'a';
     }
 
-    public function testOffsetUnsetExceptions(): void
+    public function testOffsetUnsetException(): void
     {
         static::expectException(DeoxyriboNucleicAcidException::class);
 
         $dna = (new DeoxyriboNucleicAcid())
             ->add(NucleoBase::Adenine);
 
-        $dna[0] = null;
+        unset($dna[0]);
     }
 }
