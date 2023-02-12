@@ -46,7 +46,7 @@ final class DeoxyriboNucleicAcidTest extends TestCase
         static::assertFalse(isset($dna[0]));
     }
 
-    public function offsetGetValues() : array
+    static public function offsetGetValues() : array
     {
         return [
             [-1],
@@ -78,7 +78,7 @@ final class DeoxyriboNucleicAcidTest extends TestCase
         isset($dna[$badValue]);
     }
 
-    public function offsetSetValues() : array
+    static public function offsetSetValues() : array
     {
         return [
             [-1],
