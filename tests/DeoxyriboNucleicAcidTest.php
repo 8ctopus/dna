@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @covers \Oct8pus\DNA\DeoxyriboNucleicAcid
  */
 final class DeoxyriboNucleicAcidTest extends TestCase
@@ -37,26 +38,26 @@ final class DeoxyriboNucleicAcidTest extends TestCase
         static::assertSame('ATCC', (string) $dna);
 
         // offset exists
-        static::assertSame(true, isset($dna[3]));
-        static::assertSame(false, isset($dna[4]));
+        static::assertTrue(isset($dna[3]));
+        static::assertFalse(isset($dna[4]));
 
         $dna->truncate();
         static::assertSame(0, $dna->length());
-        static::assertSame(false, isset($dna[0]));
+        static::assertFalse(isset($dna[0]));
     }
 
     public function offsetGetValues() : array
     {
-       return [
-           [-1],
-           ['a'],
-       ];
+        return [
+            [-1],
+            ['a'],
+        ];
     }
 
     /**
      * @dataProvider offsetGetValues
      */
-    public function testOffsetGetExceptions(mixed $badValue): void
+    public function testOffsetGetExceptions(mixed $badValue) : void
     {
         static::expectException(DeoxyriboNucleicAcidException::class);
 
@@ -68,7 +69,7 @@ final class DeoxyriboNucleicAcidTest extends TestCase
     /**
      * @dataProvider offsetGetValues
      */
-    public function testOffsetExistsExceptions(mixed $badValue): void
+    public function testOffsetExistsExceptions(mixed $badValue) : void
     {
         static::expectException(DeoxyriboNucleicAcidException::class);
 
@@ -79,17 +80,17 @@ final class DeoxyriboNucleicAcidTest extends TestCase
 
     public function offsetSetValues() : array
     {
-       return [
-           [-1],
-           ['a'],
-           [0],
-       ];
+        return [
+            [-1],
+            ['a'],
+            [0],
+        ];
     }
 
     /**
      * @dataProvider offsetSetValues
      */
-    public function testOffsetSetExceptions(mixed $badValue): void
+    public function testOffsetSetExceptions(mixed $badValue) : void
     {
         static::expectException(DeoxyriboNucleicAcidException::class);
 
@@ -99,7 +100,7 @@ final class DeoxyriboNucleicAcidTest extends TestCase
         $dna[$badValue] = 'a';
     }
 
-    public function testOffsetUnsetException(): void
+    public function testOffsetUnsetException() : void
     {
         static::expectException(DeoxyriboNucleicAcidException::class);
 

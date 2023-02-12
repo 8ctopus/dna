@@ -6,12 +6,10 @@ namespace Oct8pus\DNA;
 
 use ArrayAccess;
 use Exception;
-use Oct8pus\DNA\NucleoBase;
 use Stringable;
 
 class DeoxyriboNucleicAcidException extends Exception
 {
-
 }
 
 class DeoxyriboNucleicAcid implements Stringable, ArrayAccess
@@ -23,12 +21,6 @@ class DeoxyriboNucleicAcid implements Stringable, ArrayAccess
         $this->strand = [];
     }
 
-    public function add(NucleoBase $nucleoBase) : self
-    {
-        $this->strand[] = $nucleoBase;
-        return $this;
-    }
-
     public function __toString() : string
     {
         $str = '';
@@ -38,6 +30,12 @@ class DeoxyriboNucleicAcid implements Stringable, ArrayAccess
         }
 
         return $str;
+    }
+
+    public function add(NucleoBase $nucleoBase) : self
+    {
+        $this->strand[] = $nucleoBase;
+        return $this;
     }
 
     public function length() : int

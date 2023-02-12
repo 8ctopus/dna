@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @covers \Oct8pus\DNA\NucleoBase
  */
 final class NucleoBaseAcidTest extends TestCase
