@@ -1,0 +1,31 @@
+{
+    "name": "8ctopus/dna",
+    "type": "library",
+    "description": "Deoxyribonucleicacid (DNA) simulation.",
+    "keywords": ["dna"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "8ctopus",
+            "email": "hello@octopuslabs.io"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.4",
+        "nunomaduro/collision": "^6.2",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Oct8pus\\DNA\\": "src/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit --coverage-html=coverage",
+        "cs-review": "php-cs-fixer fix --verbose --diff --dry-run",
+        "cs-fix": "php-cs-fixer fix --verbose"
+    }
+}
