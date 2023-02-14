@@ -16,7 +16,7 @@ final class DeoxyriboNucleicAcidTest extends TestCase
 {
     public function testBasic() : void
     {
-        $dna = (new DeoxyriboNucleicAcid());
+        $dna = (new DeoxyriboNucleicAcid(0));
 
         static::assertSame(0, $dna->length());
         static::assertSame('', (string) $dna);
@@ -61,7 +61,7 @@ final class DeoxyriboNucleicAcidTest extends TestCase
     {
         static::expectException(DeoxyriboNucleicAcidException::class);
 
-        $dna = (new DeoxyriboNucleicAcid());
+        $dna = (new DeoxyriboNucleicAcid(0));
 
         $dna[$badValue];
     }
@@ -73,7 +73,7 @@ final class DeoxyriboNucleicAcidTest extends TestCase
     {
         static::expectException(DeoxyriboNucleicAcidException::class);
 
-        $dna = (new DeoxyriboNucleicAcid());
+        $dna = (new DeoxyriboNucleicAcid(0));
 
         isset($dna[$badValue]);
     }
@@ -94,7 +94,7 @@ final class DeoxyriboNucleicAcidTest extends TestCase
     {
         static::expectException(DeoxyriboNucleicAcidException::class);
 
-        $dna = (new DeoxyriboNucleicAcid())
+        $dna = (new DeoxyriboNucleicAcid(0))
             ->add(NucleoBase::Adenine);
 
         $dna[$badValue] = 'a';
@@ -104,7 +104,7 @@ final class DeoxyriboNucleicAcidTest extends TestCase
     {
         static::expectException(DeoxyriboNucleicAcidException::class);
 
-        $dna = (new DeoxyriboNucleicAcid())
+        $dna = (new DeoxyriboNucleicAcid(0))
             ->add(NucleoBase::Adenine);
 
         unset($dna[0]);

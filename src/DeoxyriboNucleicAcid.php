@@ -22,9 +22,13 @@ class DeoxyriboNucleicAcid implements Stringable, ArrayAccess
      */
     private array $strand;
 
-    public function __construct()
+    public function __construct(int $length)
     {
         $this->strand = [];
+
+        for ($i = 0; $i < $length; ++$i) {
+            $this->strand[] = NucleoBase::random();
+        }
     }
 
     public function __toString() : string

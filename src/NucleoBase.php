@@ -14,7 +14,7 @@ enum NucleoBase : string
 
     case Cytosine = 'C';
 
-    public function random() : self
+    public static function random() : self
     {
         return match (rand(0, 3)) {
             0 => self::Adenine,
