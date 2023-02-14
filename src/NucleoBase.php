@@ -4,25 +4,15 @@ declare(strict_types=1);
 
 namespace Oct8pus\DNA;
 
-enum NucleoBase
+enum NucleoBase : string
 {
-    case Adenine;
+    case Adenine = 'A';
 
-    case Thymine;
+    case Thymine = 'T';
 
-    case Guanine;
+    case Guanine = 'G';
 
-    case Cytosine;
-
-    public function char() : string
-    {
-        return match ($this) {
-            self::Adenine => 'A',
-            self::Thymine => 'T',
-            self::Guanine => 'G',
-            self::Cytosine => 'C',
-        };
-    }
+    case Cytosine = 'C';
 
     public function random() : self
     {

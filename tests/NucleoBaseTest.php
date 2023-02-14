@@ -22,9 +22,9 @@ final class NucleoBaseTest extends TestCase
 
     public function testChar() : void
     {
-        static::assertSame('A', NucleoBase::Adenine->char());
-        static::assertSame('T', NucleoBase::Thymine->char());
-        static::assertSame('G', NucleoBase::Guanine->char());
-        static::assertSame('C', NucleoBase::Cytosine->char());
+        static::assertSame('A', NucleoBase::Adenine->value);
+        static::assertSame('T', NucleoBase::Thymine->value);
+        static::assertSame('G', NucleoBase::Guanine->value);
+        static::assertSame('C', NucleoBase::Cytosine->value);
     }
 }

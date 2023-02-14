@@ -12,8 +12,14 @@ class DeoxyriboNucleicAcidException extends Exception
 {
 }
 
+/**
+ * @implements ArrayAccess<int, NucleoBase>
+ */
 class DeoxyriboNucleicAcid implements Stringable, ArrayAccess
 {
+    /**
+     * @var NucleoBase[]
+     */
     private array $strand;
 
     public function __construct()
@@ -26,7 +32,7 @@ class DeoxyriboNucleicAcid implements Stringable, ArrayAccess
         $str = '';
 
         foreach ($this->strand as $nucleoBase) {
-            $str .= $nucleoBase->char();
+            $str .= $nucleoBase->value;
         }
 
         return $str;
