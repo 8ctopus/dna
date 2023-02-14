@@ -35,7 +35,11 @@ class DeoxyriboNucleicAcid implements Stringable, ArrayAccess
     {
         $str = '';
 
-        foreach ($this->strand as $nucleoBase) {
+        foreach ($this->strand as $index => $nucleoBase) {
+            if ($index && !($index % 6)) {
+                $str .= ' ';
+            }
+
             $str .= $nucleoBase->value;
         }
 
