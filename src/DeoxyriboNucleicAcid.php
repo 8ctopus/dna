@@ -12,6 +12,15 @@ class DeoxyriboNucleicAcidException extends Exception
 {
 }
 
+enum MutationType
+{
+    case Substitution;
+
+    case Insertion;
+
+    case Deletion;
+}
+
 /**
  * @implements ArrayAccess<int, NucleoBase>
  */
@@ -60,6 +69,29 @@ class DeoxyriboNucleicAcid implements Stringable, ArrayAccess
     public function truncate() : self
     {
         $this->strand = [];
+        return $this;
+    }
+
+    public function mutate(MutationType $mutationType) : self
+    {
+        // point mutation
+        // frameshift mutation (insert or delete)
+        // duplication
+
+        switch ($mutationType) {
+            case MutationType::Substitution:
+                $this->strand[rand(0, $this->length() - 1)] = NucleoBase::random();
+                break;
+
+            case MutationType::Insertion:
+                array_splice($this->strand, rand(0, $this->length()), 0, [NucleoBase::random()]);
+                break;
+
+            case MutationType::Deletion:
+                array_splice($this->strand, rand(0, $this->length() - 1), 1);
+                break;
+        }
+
         return $this;
     }
 
