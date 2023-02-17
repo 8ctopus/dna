@@ -12,13 +12,18 @@ class DeoxyriboNucleicAcidException extends Exception
 {
 }
 
-enum MutationType
+enum MutationType : int
 {
-    case Substitution;
+    case Substitution = 0;
 
-    case Insertion;
+    case Insertion = 1;
 
-    case Deletion;
+    case Deletion = 2;
+
+    public static function random() : self
+    {
+        return self::from(rand(0, 2));
+    }
 }
 
 /**
@@ -26,33 +31,22 @@ enum MutationType
  */
 class DeoxyriboNucleicAcid implements Stringable, ArrayAccess
 {
-    /**
-     * @var NucleoBase[]
-     */
-    private array $strand;
+    private string $strand;
 
     public function __construct(int $length)
     {
-        $this->strand = [];
+        $this->strand = '';
 
         for ($i = 0; $i < $length; ++$i) {
-            $this->strand[] = NucleoBase::random();
+            $this->strand .= NucleoBase::random()->value;
         }
     }
 
     public function __toString() : string
     {
-        $str = '';
+        $length = strlen($this->strand);
 
-        foreach ($this->strand as $index => $nucleoBase) {
-            if ($index && !($index % 6)) {
-                $str .= ' ';
-            }
-
-            $str .= $nucleoBase->value;
-        }
-
-        return $str;
+        return "[{$length}] {$this->strand}";
     }
 
     public function add(NucleoBase $nucleoBase) : self
@@ -63,12 +57,12 @@ class DeoxyriboNucleicAcid implements Stringable, ArrayAccess
 
     public function length() : int
     {
-        return count($this->strand);
+        return strlen($this->strand);
     }
 
     public function truncate() : self
     {
-        $this->strand = [];
+        $this->strand = '';
         return $this;
     }
 
@@ -80,19 +74,30 @@ class DeoxyriboNucleicAcid implements Stringable, ArrayAccess
 
         switch ($mutationType) {
             case MutationType::Substitution:
-                $this->strand[rand(0, $this->length() - 1)] = NucleoBase::random();
+                $this->strand[rand(0, $this->length() - 1)] = NucleoBase::random()->value;
                 break;
 
             case MutationType::Insertion:
-                array_splice($this->strand, rand(0, $this->length()), 0, [NucleoBase::random()]);
+                $arr = str_split($this->strand, 1);
+                $rnd = rand(0, $this->length());
+                array_splice($arr, $rnd, 0, NucleoBase::random()->value);
+                $this->strand = implode('', $arr);
                 break;
 
             case MutationType::Deletion:
-                array_splice($this->strand, rand(0, $this->length() - 1), 1);
+                $arr = str_split($this->strand, 1);
+                $rnd = rand(0, $this->length() - 1);
+                array_splice($arr, $rnd, 1);
+                $this->strand = implode('', $arr);
                 break;
         }
 
         return $this;
+    }
+
+    public function searchPattern(string $pattern) : bool
+    {
+        return strpos($this->strand, $pattern) !== false;
     }
 
     public function offsetGet(mixed $offset) : NucleoBase
@@ -105,7 +110,7 @@ class DeoxyriboNucleicAcid implements Stringable, ArrayAccess
             throw new DeoxyriboNucleicAcidException('out of range');
         }
 
-        return $this->strand[$offset];
+        return NucleoBase::from($this->strand[$offset]);
     }
 
     public function offsetSet(mixed $offset, mixed $value) : void
